@@ -1,43 +1,28 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_learn/responsive/mobile_screen_layout.dart';
+import 'package:flutter_learn/responsive/responsive_layout_screen.dart';
+import 'package:flutter_learn/responsive/web_screen_layout.dart';
+import 'package:flutter_learn/utils/colors.dart';
 
-void main() {
-  runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  final title = 'Flutter sample';
-  final message = 'Flutter message.';
-  // This widget is the root of your application.
+  const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      home: MyHomePage(
-        title: this.title,
-        message: this.message,
-      ),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  final String title;
-  final String message;
-  MyHomePage({required this.title, required this.message}) : super();
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Text(
-        widget.message,
-        style: const TextStyle(fontSize: 32.0),
+      debugShowCheckedModeBanner: false,
+      title: 'Instagram Clone',
+      theme: ThemeData.dark()
+          .copyWith(scaffoldBackgroundColor: mobileBackgroudColor),
+      home: const ResponsiveLayout(
+        mobileScreenLayout: MobileScreenLayout(),
+        webScreenLayout: WebScreenLayout(),
       ),
     );
   }
