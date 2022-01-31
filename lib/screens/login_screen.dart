@@ -45,6 +45,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 textInputType: TextInputType.emailAddress,
                 textEditingController: _emailController,
               ),
+              const SizedBox(
+                height: 24,
+              ),
               // text field input for password
               TextFieldInput(
                 hintText: 'Enter your password',
@@ -52,8 +55,51 @@ class _LoginScreenState extends State<LoginScreen> {
                 textEditingController: _passwordController,
                 isPass: true,
               ),
+              const SizedBox(
+                height: 24,
+              ),
               // button login
+              InkWell(
+                onTap: () {},
+                child: Container(
+                  child: const Text('Log in'),
+                  width: double.infinity,
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  decoration: const ShapeDecoration(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(4),
+                      ),
+                    ),
+                    color: blueColor,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 12,
+              ),
+              Flexible(child: Container(), flex: 2),
               // Transitioning to signin up
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    child: const Text(
+                      "Don't have an account?",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      child: const Text("Sign up."),
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
