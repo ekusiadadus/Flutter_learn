@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_learn/resources/storage_methods.dart';
+import 'dart:typed_data';
 
 class Authmethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -12,18 +14,20 @@ class Authmethods {
     required String password,
     required String username,
     required String bio,
-    // required Uint8List file,
+    required Uint8List file,
   }) async {
     String res = "Some error occurred";
     try {
       if (email.isNotEmpty ||
           password.isNotEmpty ||
           username.isNotEmpty ||
-          bio.isNotEmpty) {
+          bio.isNotEmpty ||
+          file.isNotEmpty) {
         // register user
         UserCredential cred = await _auth.createUserWithEmailAndPassword(
             email: email, password: password);
-
+        String photoUrl = await StorageMethods()
+            .uploadImageToStorage('profilePics', file, false);
         // add user to our database
         await _firestore.collection('users').doc(cred.user!.uid).set({
           'username': username,
@@ -32,6 +36,7 @@ class Authmethods {
           'bio': bio,
           'followers': [],
           'following': [],
+          'photoUrl': photoUrl,
         });
 
         // //
