@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_learn/screens/home_screen.dart';
+import 'package:flutter_learn/responsive/mobile_screen_layout.dart';
+import 'package:flutter_learn/responsive/responsive_layout_screen.dart';
+import 'package:flutter_learn/responsive/web_screen_layout.dart';
+import 'package:flutter_learn/screens/signup_screen.dart';
 import 'package:flutter_learn/utils/colors.dart';
 import 'package:flutter_learn/utils/utils.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -32,15 +35,28 @@ class _LoginScreenState extends State<LoginScreen> {
     String res = await AuthMethods().loginUser(
         email: _emailController.text, password: _passwordController.text);
     if (res == 'success') {
-      // navigate to home screen
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const HomeScreen()));
+        MaterialPageRoute(
+          builder: (context) => const ResponsiveLayout(
+            webScreenLayout: WebScreenLayout(),
+            mobileScreenLayout: MobileScreenLayout(),
+          ),
+        ),
+      );
     } else {
       showSnackBar(res, context);
     }
     setState(() {
       _isLoading = false;
     });
+  }
+
+  void navigateToSignup() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const SignupScreen(),
+      ),
+    );
   }
 
   @override
@@ -120,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     padding: const EdgeInsets.symmetric(vertical: 8),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: navigateToSignup,
                     child: Container(
                       child: const Text("Sign up."),
                       padding: const EdgeInsets.symmetric(vertical: 8),
