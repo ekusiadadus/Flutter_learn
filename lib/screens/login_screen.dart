@@ -8,6 +8,7 @@ import 'package:flutter_learn/utils/utils.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_learn/widgets/text_field_input.dart';
 import 'package:flutter_learn/resources/auth_methods.dart';
+import 'package:flutter_learn/utils/global_variables.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);

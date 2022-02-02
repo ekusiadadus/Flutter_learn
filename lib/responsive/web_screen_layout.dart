@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class WebScreenLayout extends StatefulWidget {
@@ -10,21 +8,32 @@ class WebScreenLayout extends StatefulWidget {
 }
 
 class _WebScreenLayoutState extends State<WebScreenLayout> {
-  String username = "";
+  int _page = 0;
+  late PageController pageController; // for tabs animation
 
   @override
   void initState() {
     super.initState();
-    getUsername();
+    pageController = PageController();
   }
 
-  void getUsername() async {
-    DocumentSnapshot snap = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .get();
+  @override
+  void dispose() {
+    super.dispose();
+    pageController.dispose();
+  }
+
+  void onPageChanged(int page) {
     setState(() {
-      username = (snap.data() as Map<String, dynamic>)['username'];
+      _page = page;
+    });
+  }
+
+  void navigationTapped(int page) {
+    //Animating Page
+    pageController.jumpToPage(page);
+    setState(() {
+      _page = page;
     });
   }
 
@@ -32,7 +41,7 @@ class _WebScreenLayoutState extends State<WebScreenLayout> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text('${username}'),
+        child: Text('This is web'),
       ),
     );
   }
