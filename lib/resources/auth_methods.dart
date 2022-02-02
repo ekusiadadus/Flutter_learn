@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_learn/resources/storage_methods.dart';
 import 'dart:typed_data';
 
-class Authmethods {
+class AuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
@@ -50,6 +49,26 @@ class Authmethods {
         // });
 
         res = 'success';
+      }
+    } catch (err) {
+      res = err.toString();
+    }
+    return res;
+  }
+
+  // loggin in user
+
+  Future<String> loginUser(
+      {required String email, required String password}) async {
+    String res = "Some error occured";
+
+    try {
+      if (email.isNotEmpty || password.isNotEmpty) {
+        await _auth.signInWithEmailAndPassword(
+            email: email, password: password);
+        res = 'success';
+      } else {
+        res = "Please enter all the fields";
       }
     } catch (err) {
       res = err.toString();
