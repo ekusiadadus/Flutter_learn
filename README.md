@@ -1,10 +1,2 @@
-# 2022.01.22
-
-![2022.01.22](/docs/images/1.png)
-
-# 2022.02.1
-
-![2022.02.1](docs/images/instagram_1.png)
-![2022.02.1](docs/images/instagram_2.png)
-![2022.02.1](docs/images/instagram_3.png)
-![2022.02.1](docs/images/instagram_4.png)
+![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)
+![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase)
